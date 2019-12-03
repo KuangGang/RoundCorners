@@ -1,19 +1,25 @@
-package com.kproduce.roundcornerviews.view;
+package com.kproduce.roundcorners.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
-import com.kproduce.roundcornerviews.R;
+import com.kproduce.roundcorners.R;
 
 public class RoundLinearLayout extends LinearLayout {
 
-    private Context mContext;
     private Path mPath;
+    private Path mTempPath;
+    private Paint mPaint;
     private float[] mRadii;
 
     public RoundLinearLayout(Context context) {
@@ -26,14 +32,22 @@ public class RoundLinearLayout extends LinearLayout {
 
     public RoundLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs, defStyleAttr);
+        init(context, attrs);
     }
 
-    private void init(Context context, AttributeSet attrs, int defStyleAttr) {
-        mContext = context;
+    private void init(Context context, AttributeSet attrs) {
+        // 禁止硬件加速，硬件加速会有一些问题，这里禁用掉
+        setLayerType(LAYER_TYPE_SOFTWARE, null);
+        if (getBackground() == null) {
+            setBackgroundColor(Color.parseColor("#00000000"));
+        }
+
         mRadii = new float[8];
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
+        mPaint.setColor(Color.WHITE);
         mPath = new Path();
-        mPath.setFillType(Path.FillType.EVEN_ODD);
+        mTempPath = new Path();
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RoundCorner);
         if (array == null) {
@@ -54,11 +68,7 @@ public class RoundLinearLayout extends LinearLayout {
         setRadius(radiusTopLeft, radiusTopRight, radiusBottomLeft, radiusBottomRight);
     }
 
-    public void setRadius(int radiusDp) {
-        setRadius(radiusDp, radiusDp, radiusDp, radiusDp);
-    }
-
-    public void setRadius(int topLeftDp, int topRightDp, int bottomLeftDp, int bottomRightDp) {
+    private void setRadius(int topLeftDp, int topRightDp, int bottomLeftDp, int bottomRightDp) {
         mRadii[0] = topLeftDp;
         mRadii[1] = topLeftDp;
         mRadii[2] = topRightDp;
@@ -71,18 +81,27 @@ public class RoundLinearLayout extends LinearLayout {
 
     @Override
     public void draw(Canvas canvas) {
-        int saveCount = canvas.save();
-        checkPathChanged();
-        canvas.clipPath(mPath);
         super.draw(canvas);
-        canvas.restoreToCount(saveCount);
+        clipPath(canvas);
     }
 
-    private void checkPathChanged() {
+    private void clipPath(Canvas canvas) {
         mPath.reset();
         mPath.addRoundRect(new RectF(0, 0, getWidth(), getHeight()),
                 mRadii,
                 Path.Direction.CW);
+
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            mTempPath.reset();
+            mTempPath.addRect(0, 0, getWidth(), getHeight(), Path.Direction.CW);
+            mTempPath.op(mPath, Path.Op.DIFFERENCE);
+            canvas.drawPath(mTempPath, mPaint);
+        } else {
+            canvas.clipPath(mPath);
+        }
     }
 
 }

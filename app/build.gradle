@@ -4,7 +4,7 @@ android {
     compileSdkVersion compile_sdk_version
     buildToolsVersion build_tool_version
     defaultConfig {
-        applicationId "com.kproduce.roundcornerviews"
+        applicationId "com.kproduce.roundcorners"
         minSdkVersion min_sdk_version
         targetSdkVersion target_sdk_version
         versionCode version_code

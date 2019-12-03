@@ -1,4 +1,4 @@
-package com.kproduce.roundcornerviews;
+package com.kproduce.roundcorners;
 
 import androidx.appcompat.app.AppCompatActivity;
 
