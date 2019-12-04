@@ -1,16 +1,19 @@
 # RoundCorners
+比较常用的ViewGroup和View的圆角实现，一发治好设计的圆角病。
+## 效果预览
 
-### 效果预览
-
-|![](images/01.PNG)|![](images/02.PNG)|![](images/03.PNG)|
+|![](images/01.png)|![](images/02.png)|![](images/03.png)|
 |---|---|---|
-|![](images/04.PNG)|![](images/05.PNG)|![](images/06.PNG)|
-### 特点
+|![](images/04.png)|![](images/05.png)|![](images/06.png)|
+
+## 特点
 * LinearLayout、RelativeLayout、FrameLayout支持圆角
 * ImageView、TextView、View支持圆角
 * 使用xml进行配置，使用简单
 * ......
-### 基本用法
+
+
+## 基本用法
 **Step 1. 添加JitPack仓库**
 在项目根目录下的 `build.gradle` 中添加仓库:
 ``` gradle
@@ -35,7 +38,7 @@ dependencies {
     android:scaleType="centerCrop"
     android:src="@mipmap/ic_test"
     app:rRadius="30dp"/>
-    
+
 <com.kproduce.roundcorners.RoundTextView
     android:layout_width="200dp"
     android:layout_height="100dp"
@@ -45,7 +48,7 @@ dependencies {
     android:textColor="@android:color/white"
     android:textSize="40sp"
     app:rRightRadius="30dp" />
-    
+
 <com.kproduce.roundcorners.RoundRelativeLayout
     android:layout_width="200dp"
     android:layout_height="200dp"
@@ -61,7 +64,7 @@ dependencies {
 ……
 ```
 
-### 支持的属性、方法
+## 支持的属性、方法
 |属性名|含义|默认值
 |---|---|---|
 |rRadius|统一设置四个角的圆角半径|0dp
