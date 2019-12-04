@@ -70,4 +70,28 @@
         <attr name="rBottomLeftRadius" />
         <attr name="rBottomRightRadius" />
     </declare-styleable>
+
+    <declare-styleable name="RoundTextView">
+        <attr name="rRadius" />
+        <attr name="rLeftRadius" />
+        <attr name="rRightRadius" />
+        <attr name="rTopRadius" />
+        <attr name="rBottomRadius" />
+        <attr name="rTopLeftRadius" />
+        <attr name="rTopRightRadius" />
+        <attr name="rBottomLeftRadius" />
+        <attr name="rBottomRightRadius" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundView">
+        <attr name="rRadius" />
+        <attr name="rLeftRadius" />
+        <attr name="rRightRadius" />
+        <attr name="rTopRadius" />
+        <attr name="rBottomRadius" />
+        <attr name="rTopLeftRadius" />
+        <attr name="rTopRightRadius" />
+        <attr name="rBottomLeftRadius" />
+        <attr name="rBottomRightRadius" />
+    </declare-styleable>
 </resources>
