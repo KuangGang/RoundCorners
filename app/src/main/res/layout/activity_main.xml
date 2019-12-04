@@ -1,37 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.kproduce.roundcorners.RoundFrameLayout
-        android:layout_width="200dp"
-        android:layout_height="300dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:orientation="vertical"
-        android:visibility="visible"
-        app:rRadius="20dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <View
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/black" />
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="40dp">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_cover_seven" />
-    </com.kproduce.roundcorners.RoundFrameLayout>
+            <com.kproduce.roundcorners.RoundImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_test"
+                app:rRadius="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="RoundImageView"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
 
-    <com.kproduce.roundcorners.RoundImageView
-        android:layout_width="200dp"
-        android:layout_height="300dp"
-        android:layout_centerHorizontal="true"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/ic_cover_seven"
-        android:visibility="gone"
-        app:rRadius="20dp" />
-</RelativeLayout>
+            <com.kproduce.roundcorners.RoundTextView
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="40dp"
+                android:background="@android:color/holo_blue_dark"
+                android:gravity="center"
+                android:text="Hello!"
+                android:textColor="@android:color/white"
+                android:textSize="40sp"
+                app:rRightRadius="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="RoundTextView"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <com.kproduce.roundcorners.RoundView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="40dp"
+                android:background="@android:color/holo_red_dark"
+                app:rBottomLeftRadius="30dp"
+                app:rTopRightRadius="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="RoundView"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <com.kproduce.roundcorners.RoundLinearLayout
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical"
+                app:rLeftRadius="30dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/black" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_red_dark" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_green_dark" />
+            </com.kproduce.roundcorners.RoundLinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="RoundLinearLayout"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <com.kproduce.roundcorners.RoundRelativeLayout
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="40dp"
+                app:rRightRadius="30dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark" />
+            </com.kproduce.roundcorners.RoundRelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="RoundRelativeLayout"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <com.kproduce.roundcorners.RoundFrameLayout
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="40dp"
+                app:rBottomLeftRadius="30dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_orange_dark" />
+            </com.kproduce.roundcorners.RoundFrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="RoundFrameLayout"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
