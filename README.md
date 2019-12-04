@@ -27,7 +27,7 @@ allprojects {
 **Step 2. 添加项目依赖**
 ``` gradle
 dependencies {
-    implementation 'com.github.KuangGang:RoundCorners:v1.0.0'
+    implementation 'com.github.KuangGang:RoundCorners:1.0.0'
 }
 ```
 **Step 3. 在布局文件中添加需要的RoundCorners**
