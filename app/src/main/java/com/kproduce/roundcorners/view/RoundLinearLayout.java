@@ -25,8 +25,14 @@ public class RoundLinearLayout extends LinearLayout {
     }
 
     @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mHelper.onSizeChanged(w, h);
+    }
+
+    @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        mHelper.clipPath(canvas, this);
+        mHelper.clipPath(canvas);
     }
 }

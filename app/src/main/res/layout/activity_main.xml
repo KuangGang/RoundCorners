@@ -4,33 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.kproduce.roundcorners.view.RoundLinearLayout
+    <com.kproduce.roundcorners.view.RoundFrameLayout
         android:layout_width="200dp"
         android:layout_height="300dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         app:rRadius="20dp">
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:background="@android:color/black" />
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_cover_seven" />
-    </com.kproduce.roundcorners.view.RoundLinearLayout>
+    </com.kproduce.roundcorners.view.RoundFrameLayout>
 
 
     <com.kproduce.roundcorners.view.RoundImageView
         android:layout_width="200dp"
         android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_cover_seven" />
+        android:src="@mipmap/ic_cover_seven"
+        android:visibility="gone"
+        app:rRadius="20dp" />
 </RelativeLayout>

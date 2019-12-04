@@ -9,31 +9,36 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.graphics.Xfermode;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 
 public class RoundHelper {
 
+    private float[] mRadii;
+
+    private Paint mPaint;
+    private RectF mRectF;
+
     private Path mPath;
     private Path mTempPath;
-    private Paint mPaint;
-    private float[] mRadii;
+
+    private Xfermode mXfermode;
 
     public void init(Context context, AttributeSet attrs, View view) {
         // 禁止硬件加速，硬件加速会有一些问题，这里禁用掉
         view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        if (view instanceof ViewGroup && view.getBackground() == null) {
+        if (view.getBackground() == null) {
             view.setBackgroundColor(Color.parseColor("#00000000"));
         }
 
         mRadii = new float[8];
         mPaint = new Paint();
-        mPaint.setAntiAlias(true);
-        mPaint.setColor(Color.WHITE);
+        mRectF = new RectF();
         mPath = new Path();
         mTempPath = new Path();
+        mXfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_OUT);
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RoundCorner);
         if (array == null) {
@@ -65,19 +70,27 @@ public class RoundHelper {
         mRadii[7] = bottomLeftDp;
     }
 
+    public void onSizeChanged(int width, int height) {
+        if (mRectF == null) {
+            return;
+        }
+        mRectF.set(0, 0, width, height);
+    }
 
-    public void clipPath(Canvas canvas, View view) {
+
+    public void clipPath(Canvas canvas) {
+        mPaint.reset();
         mPath.reset();
-        mPath.addRoundRect(new RectF(0, 0, view.getWidth(), view.getHeight()),
-                mRadii,
-                Path.Direction.CW);
+        mTempPath.reset();
 
+        mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
+        mPaint.setXfermode(mXfermode);
+
+        mPath.addRoundRect(mRectF, mRadii, Path.Direction.CW);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            mTempPath.reset();
-            mTempPath.addRect(0, 0, view.getWidth(), view.getHeight(), Path.Direction.CW);
+            mTempPath.addRect(mRectF, Path.Direction.CW);
             mTempPath.op(mPath, Path.Op.DIFFERENCE);
             canvas.drawPath(mTempPath, mPaint);
         } else {
