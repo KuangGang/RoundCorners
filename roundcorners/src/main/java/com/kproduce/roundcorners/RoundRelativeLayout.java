@@ -1,25 +1,23 @@
-package com.kproduce.roundcorners.view;
+package com.kproduce.roundcorners;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.view.View;
+import android.widget.RelativeLayout;
 
-import com.kproduce.roundcorners.RoundHelper;
-
-public class RoundView extends View {
+public class RoundRelativeLayout extends RelativeLayout {
 
     private RoundHelper mHelper = new RoundHelper();
 
-    public RoundView(Context context) {
+    public RoundRelativeLayout(Context context) {
         this(context, null);
     }
 
-    public RoundView(Context context, AttributeSet attrs) {
+    public RoundRelativeLayout(Context context, AttributeSet attrs) {
         this(context, attrs, -1);
     }
 
-    public RoundView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RoundRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mHelper.init(context, attrs, this);
     }
@@ -31,9 +29,8 @@ public class RoundView extends View {
     }
 
     @Override
-    public void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
         mHelper.clipPath(canvas);
     }
-
 }

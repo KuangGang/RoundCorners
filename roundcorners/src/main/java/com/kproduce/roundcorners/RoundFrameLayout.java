@@ -1,25 +1,23 @@
-package com.kproduce.roundcorners.view;
+package com.kproduce.roundcorners;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
+import android.widget.FrameLayout;
 
-import com.kproduce.roundcorners.RoundHelper;
-
-public class RoundTextView extends AppCompatTextView {
+public class RoundFrameLayout extends FrameLayout {
 
     private RoundHelper mHelper = new RoundHelper();
 
-    public RoundTextView(Context context) {
+    public RoundFrameLayout(Context context) {
         this(context, null);
     }
 
-    public RoundTextView(Context context, AttributeSet attrs) {
+    public RoundFrameLayout(Context context, AttributeSet attrs) {
         this(context, attrs, -1);
     }
 
-    public RoundTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RoundFrameLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mHelper.init(context, attrs, this);
     }
@@ -31,9 +29,8 @@ public class RoundTextView extends AppCompatTextView {
     }
 
     @Override
-    public void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
         mHelper.clipPath(canvas);
     }
-
 }

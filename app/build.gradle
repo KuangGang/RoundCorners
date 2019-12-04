@@ -4,12 +4,11 @@ android {
     compileSdkVersion compile_sdk_version
     buildToolsVersion build_tool_version
     defaultConfig {
-        applicationId "com.kproduce.roundcorners"
+        applicationId "com.kproduce.roundcorners.test"
         minSdkVersion min_sdk_version
         targetSdkVersion target_sdk_version
         versionCode version_code
         versionName version_name
-        multiDexEnabled true
     }
 
     compileOptions {
@@ -35,6 +34,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':roundcorners')
     implementation 'com.android.support:design:' + support_library_version
     implementation 'com.android.support:appcompat-v7:' + support_library_version
     implementation 'com.android.support:support-v4:' + support_library_version

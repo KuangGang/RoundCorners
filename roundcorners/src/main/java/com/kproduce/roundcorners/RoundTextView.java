@@ -1,25 +1,23 @@
-package com.kproduce.roundcorners.view;
+package com.kproduce.roundcorners;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
-import com.kproduce.roundcorners.RoundHelper;
-
-public class RoundImageView extends AppCompatImageView {
+public class RoundTextView extends AppCompatTextView {
 
     private RoundHelper mHelper = new RoundHelper();
 
-    public RoundImageView(Context context) {
+    public RoundTextView(Context context) {
         this(context, null);
     }
 
-    public RoundImageView(Context context, AttributeSet attrs) {
+    public RoundTextView(Context context, AttributeSet attrs) {
         this(context, attrs, -1);
     }
 
-    public RoundImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RoundTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mHelper.init(context, attrs, this);
     }
