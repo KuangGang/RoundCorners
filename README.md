@@ -76,3 +76,8 @@ dependencies {
 |rTopRightRadius|右上角圆角半径|0dp
 |rBottomLeftRadius|左下角圆角半径|0dp
 |rBottomRightRadius|右下角圆角半径|0dp
+
+### 原理浅解
+1. 使用Path的addRoundRect方法，将需要剪切的圆角半径进行设置。
+2. 所有View和ViewGroup的绘制都需要经过draw方法，在draw结束之后使用第一步的Path进行画布切割。
+3. 注意在draw中减少创建对象次数。
