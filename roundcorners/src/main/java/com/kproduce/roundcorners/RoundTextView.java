@@ -5,6 +5,9 @@ import android.graphics.Canvas;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
+/**
+ * @author kuanggang
+ */
 public class RoundTextView extends AppCompatTextView {
 
     private RoundHelper mHelper = new RoundHelper();

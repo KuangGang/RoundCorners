@@ -5,6 +5,9 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.View;
 
+/**
+ * @author kuanggang
+ */
 public class RoundView extends View {
 
     private RoundHelper mHelper = new RoundHelper();

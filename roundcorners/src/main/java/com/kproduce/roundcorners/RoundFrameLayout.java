@@ -5,6 +5,9 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
+/**
+ * @author kuanggang
+ */
 public class RoundFrameLayout extends FrameLayout {
 
     private RoundHelper mHelper = new RoundHelper();

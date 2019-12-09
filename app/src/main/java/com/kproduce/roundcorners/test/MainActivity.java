@@ -4,6 +4,9 @@ package com.kproduce.roundcorners.test;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+/**
+ * @author kuanggang
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override

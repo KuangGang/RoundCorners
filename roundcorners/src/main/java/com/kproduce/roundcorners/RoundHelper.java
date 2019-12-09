@@ -14,6 +14,9 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 
+/**
+ * @author kuanggang
+ */
 public class RoundHelper {
 
     private float[] mRadii;

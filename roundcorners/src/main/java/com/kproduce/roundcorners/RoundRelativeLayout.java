@@ -5,6 +5,9 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
+/**
+ * @author kuanggang
+ */
 public class RoundRelativeLayout extends RelativeLayout {
 
     private RoundHelper mHelper = new RoundHelper();

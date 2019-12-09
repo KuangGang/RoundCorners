@@ -5,6 +5,9 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
+/**
+ * @author kuanggang
+ */
 public class RoundLinearLayout extends LinearLayout {
 
     private RoundHelper mHelper = new RoundHelper();
