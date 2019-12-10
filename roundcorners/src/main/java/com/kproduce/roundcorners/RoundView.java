@@ -2,12 +2,11 @@ package com.kproduce.roundcorners;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * @author kuanggang
+ * @author kuanggang on 2019/12/10
  */
 public class RoundView extends View {
 
@@ -34,13 +33,10 @@ public class RoundView extends View {
 
     @Override
     public void draw(Canvas canvas) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            super.draw(canvas);
-            mHelper.drawPath(canvas);
-        } else {
-            mHelper.clipPath(canvas);
-            super.draw(canvas);
-        }
+        canvas.saveLayer(mHelper.getRectF(), null, Canvas.ALL_SAVE_FLAG);
+        super.draw(canvas);
+        mHelper.drawPath(canvas);
+        canvas.restore();
     }
 
 }

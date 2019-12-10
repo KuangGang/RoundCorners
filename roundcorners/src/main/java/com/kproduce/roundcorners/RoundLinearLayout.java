@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
 /**
- * @author kuanggang
+ * @author kuanggang on 2019/12/10
  */
 public class RoundLinearLayout extends LinearLayout {
 
@@ -34,12 +34,9 @@ public class RoundLinearLayout extends LinearLayout {
 
     @Override
     public void draw(Canvas canvas) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            super.draw(canvas);
-            mHelper.drawPath(canvas);
-        } else {
-            mHelper.clipPath(canvas);
-            super.draw(canvas);
-        }
+        canvas.saveLayer(mHelper.getRectF(), null, Canvas.ALL_SAVE_FLAG);
+        super.draw(canvas);
+        mHelper.drawPath(canvas);
+        canvas.restore();
     }
 }
