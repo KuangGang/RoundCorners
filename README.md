@@ -16,12 +16,6 @@
 * 使用xml进行配置，使用简单
 * ......
 
-### 版本记录
-|版本号|更新内容|
-|---|---|
-|1.0.1|1.修复低版本系统圆角View黑框问题<br>2.增加CircleImageView|
-|1.0.0|First Version|
-
 ### 基本用法
 **Step 1. 添加JitPack仓库**
 在项目根目录下的 `build.gradle` 中添加仓库:
@@ -98,3 +92,9 @@ View的绘制看一下这篇文章即可，代码版本比较早，但是逻辑�
 1. 使用Path的addRoundRect方法，将需要剪切的圆角半径进行设置。
 2. 所有View和ViewGroup的绘制都需要经过draw方法，在draw结束之后使用第一步的Path进行画布切割。
 3. 注意在draw中减少创建对象次数。
+
+### 版本记录
+|版本号|更新内容|
+|---|---|
+|1.0.1|1.修复低版本系统圆角View黑框问题<br>2.增加CircleImageView|
+|1.0.0|First Version|
