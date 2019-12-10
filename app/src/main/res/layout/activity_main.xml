@@ -16,10 +16,24 @@
             android:orientation="vertical"
             android:paddingBottom="40dp">
 
-            <com.kproduce.roundcorners.RoundImageView
+            <com.kproduce.roundcorners.CircleImageView
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="20dp"
+                android:src="@mipmap/ic_test" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="CircleImageView"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <com.kproduce.roundcorners.RoundImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="40dp"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/ic_test"
                 app:rRadius="30dp" />
@@ -31,7 +45,6 @@
                 android:text="RoundImageView"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
-
 
             <com.kproduce.roundcorners.RoundTextView
                 android:layout_width="200dp"
@@ -57,8 +70,10 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="40dp"
                 android:background="@android:color/holo_red_dark"
-                app:rBottomLeftRadius="30dp"
-                app:rTopRightRadius="30dp" />
+                app:rBottomLeftRadius="20dp"
+                app:rBottomRightRadius="50dp"
+                app:rTopLeftRadius="50dp"
+                app:rTopRightRadius="20dp" />
 
             <TextView
                 android:layout_width="wrap_content"

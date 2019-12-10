@@ -2,11 +2,12 @@ package com.kproduce.roundcorners;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
 /**
- * @author kuanggang
+ * @author kuanggang on 2019/12/10
  */
 public class RoundRelativeLayout extends RelativeLayout {
 
@@ -33,7 +34,9 @@ public class RoundRelativeLayout extends RelativeLayout {
 
     @Override
     public void draw(Canvas canvas) {
+        canvas.saveLayer(mHelper.getRectF(), null, Canvas.ALL_SAVE_FLAG);
         super.draw(canvas);
-        mHelper.clipPath(canvas);
+        mHelper.drawPath(canvas);
+        canvas.restore();
     }
 }

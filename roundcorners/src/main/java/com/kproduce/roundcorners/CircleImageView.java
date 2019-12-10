@@ -2,28 +2,28 @@ package com.kproduce.roundcorners;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.os.Build;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.widget.FrameLayout;
 
 /**
  * @author kuanggang on 2019/12/10
  */
-public class RoundFrameLayout extends FrameLayout {
+public class CircleImageView extends AppCompatImageView {
 
     private RoundHelper mHelper = new RoundHelper();
 
-    public RoundFrameLayout(Context context) {
+    public CircleImageView(Context context) {
         this(context, null);
     }
 
-    public RoundFrameLayout(Context context, AttributeSet attrs) {
+    public CircleImageView(Context context, AttributeSet attrs) {
         this(context, attrs, -1);
     }
 
-    public RoundFrameLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CircleImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mHelper.init(context, attrs, this);
+        mHelper.setCircle(true);
     }
 
     @Override
@@ -39,4 +39,5 @@ public class RoundFrameLayout extends FrameLayout {
         mHelper.drawPath(canvas);
         canvas.restore();
     }
+
 }

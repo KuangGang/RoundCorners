@@ -13,9 +13,10 @@ import android.graphics.Xfermode;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
- * @author kuanggang
+ * @author kuanggang on 2019/12/10
  */
 public class RoundHelper {
 
@@ -29,10 +30,11 @@ public class RoundHelper {
 
     private Xfermode mXfermode;
 
+    private boolean isCircle;
+
     public void init(Context context, AttributeSet attrs, View view) {
         // 禁止硬件加速，硬件加速会有一些问题，这里禁用掉
-        view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        if (view.getBackground() == null) {
+        if (view instanceof ViewGroup && view.getBackground() == null) {
             view.setBackgroundColor(Color.parseColor("#00000000"));
         }
 
@@ -41,7 +43,7 @@ public class RoundHelper {
         mRectF = new RectF();
         mPath = new Path();
         mTempPath = new Path();
-        mXfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_OUT);
+        mXfermode = new PorterDuffXfermode(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT ? PorterDuff.Mode.DST_OUT : PorterDuff.Mode.DST_IN);
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RoundCorner);
         if (array == null) {
@@ -59,21 +61,23 @@ public class RoundHelper {
         int radiusBottomRight = array.getDimensionPixelSize(R.styleable.RoundCorner_rBottomRightRadius, radiusBottom > 0 ? radiusBottom : radiusRight);
 
         array.recycle();
-        setRadius(radiusTopLeft, radiusTopRight, radiusBottomLeft, radiusBottomRight);
+        if (!isCircle) {
+            setRadius(radiusTopLeft, radiusTopRight, radiusBottomLeft, radiusBottomRight);
+        }
     }
 
     private void setRadius(int topLeftDp, int topRightDp, int bottomLeftDp, int bottomRightDp) {
-        mRadii[0] = topLeftDp;
-        mRadii[1] = topLeftDp;
-        mRadii[2] = topRightDp;
-        mRadii[3] = topRightDp;
-        mRadii[4] = bottomRightDp;
-        mRadii[5] = bottomRightDp;
-        mRadii[6] = bottomLeftDp;
-        mRadii[7] = bottomLeftDp;
+        mRadii[0] = mRadii[1] = topLeftDp;
+        mRadii[2] = mRadii[3] = topRightDp;
+        mRadii[4] = mRadii[5] = bottomRightDp;
+        mRadii[6] = mRadii[7] = bottomLeftDp;
     }
 
     public void onSizeChanged(int width, int height) {
+        if (isCircle) {
+            int radius = Math.min(height, width) / 2;
+            setRadius(radius, radius, radius, radius);
+        }
         if (mRectF == null) {
             return;
         }
@@ -81,23 +85,30 @@ public class RoundHelper {
     }
 
 
-    public void clipPath(Canvas canvas) {
+    public void drawPath(Canvas canvas) {
         mPaint.reset();
         mPath.reset();
-        mTempPath.reset();
 
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setXfermode(mXfermode);
 
-        mPath.addRoundRect(mRectF, mRadii, Path.Direction.CW);
-
+        mPath.addRoundRect(mRectF, mRadii, Path.Direction.CCW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            mTempPath.addRect(mRectF, Path.Direction.CW);
+            mTempPath.reset();
+            mTempPath.addRect(mRectF, Path.Direction.CCW);
             mTempPath.op(mPath, Path.Op.DIFFERENCE);
             canvas.drawPath(mTempPath, mPaint);
         } else {
-            canvas.clipPath(mPath);
+            canvas.drawPath(mPath, mPaint);
         }
+    }
+
+    public RectF getRectF() {
+        return mRectF;
+    }
+
+    public void setCircle(boolean isCircle) {
+        this.isCircle = isCircle;
     }
 }

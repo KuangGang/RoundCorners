@@ -6,7 +6,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
 /**
- * @author kuanggang
+ * @author kuanggang on 2019/12/10
  */
 public class RoundImageView extends AppCompatImageView {
 
@@ -32,9 +32,11 @@ public class RoundImageView extends AppCompatImageView {
     }
 
     @Override
-    public void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        mHelper.clipPath(canvas);
+    public void draw(Canvas canvas) {
+        canvas.saveLayer(mHelper.getRectF(), null, Canvas.ALL_SAVE_FLAG);
+        super.draw(canvas);
+        mHelper.drawPath(canvas);
+        canvas.restore();
     }
 
 }
