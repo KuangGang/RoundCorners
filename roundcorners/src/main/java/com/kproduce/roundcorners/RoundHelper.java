@@ -11,6 +11,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.Xfermode;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -81,7 +82,8 @@ public class RoundHelper {
     }
 
 
-    public void clipPath(Canvas canvas) {
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void drawPath(Canvas canvas) {
         mPaint.reset();
         mPath.reset();
         mTempPath.reset();
@@ -91,13 +93,14 @@ public class RoundHelper {
         mPaint.setXfermode(mXfermode);
 
         mPath.addRoundRect(mRectF, mRadii, Path.Direction.CW);
+        mTempPath.addRect(mRectF, Path.Direction.CW);
+        mTempPath.op(mPath, Path.Op.DIFFERENCE);
+        canvas.drawPath(mTempPath, mPaint);
+    }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            mTempPath.addRect(mRectF, Path.Direction.CW);
-            mTempPath.op(mPath, Path.Op.DIFFERENCE);
-            canvas.drawPath(mTempPath, mPaint);
-        } else {
-            canvas.clipPath(mPath);
-        }
+    public void clipPath(Canvas canvas) {
+        mPath.reset();
+        mPath.addRoundRect(mRectF, mRadii, Path.Direction.CW);
+        canvas.clipPath(mPath);
     }
 }

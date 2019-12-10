@@ -2,6 +2,7 @@ package com.kproduce.roundcorners;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
@@ -33,7 +34,12 @@ public class RoundLinearLayout extends LinearLayout {
 
     @Override
     public void draw(Canvas canvas) {
-        super.draw(canvas);
-        mHelper.clipPath(canvas);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            super.draw(canvas);
+            mHelper.drawPath(canvas);
+        } else {
+            mHelper.clipPath(canvas);
+            super.draw(canvas);
+        }
     }
 }
