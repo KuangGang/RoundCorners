@@ -71,6 +71,16 @@ dependencies {
         android:background="@android:color/holo_blue_dark" />
 </com.kproduce.roundcorners.RoundRelativeLayout>
 
+<com.kproduce.roundcorners.RoundTextView
+    android:layout_width="200dp"
+    android:layout_height="100dp"
+    android:background="@android:color/holo_blue_dark"
+    android:gravity="center"
+    android:text="Hello!"
+    android:textColor="@android:color/white"
+    android:textSize="40sp"
+    app:rLeftRadius="50dp"
+    app:rRightRadius="50dp"/>
 ……
 ```
 
