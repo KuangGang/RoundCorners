@@ -55,7 +55,8 @@
                 android:text="Hello!"
                 android:textColor="@android:color/white"
                 android:textSize="40sp"
-                app:rRightRadius="30dp" />
+                app:rLeftRadius="50dp"
+                app:rRightRadius="50dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
