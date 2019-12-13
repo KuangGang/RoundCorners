@@ -66,6 +66,26 @@
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
+            <com.kproduce.roundcorners.RoundButton
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="40dp"
+                android:background="@android:color/holo_orange_dark"
+                android:gravity="center"
+                android:text="Hello!"
+                android:textColor="@android:color/white"
+                android:textSize="40sp"
+                app:rLeftRadius="20dp"
+                app:rRightRadius="30dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="RoundButton"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
             <com.kproduce.roundcorners.RoundView
                 android:layout_width="200dp"
                 android:layout_height="200dp"
