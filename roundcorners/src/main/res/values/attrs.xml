@@ -9,6 +9,8 @@
     <attr name="rTopRightRadius" format="dimension" />
     <attr name="rBottomLeftRadius" format="dimension" />
     <attr name="rBottomRightRadius" format="dimension" />
+    <attr name="rStrokeWidth" format="dimension" />
+    <attr name="rStrokeColor" format="reference" />
 
     <declare-styleable name="RoundCorner">
         <attr name="rRadius" />
@@ -20,6 +22,8 @@
         <attr name="rTopRightRadius" />
         <attr name="rBottomLeftRadius" />
         <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
     </declare-styleable>
 
     <!-- 只是为了有提示 -->
@@ -33,6 +37,8 @@
         <attr name="rTopRightRadius" />
         <attr name="rBottomLeftRadius" />
         <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
     </declare-styleable>
 
     <declare-styleable name="RoundRelativeLayout">
@@ -45,6 +51,8 @@
         <attr name="rTopRightRadius" />
         <attr name="rBottomLeftRadius" />
         <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
     </declare-styleable>
 
     <declare-styleable name="RoundFrameLayout">
@@ -57,6 +65,8 @@
         <attr name="rTopRightRadius" />
         <attr name="rBottomLeftRadius" />
         <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
     </declare-styleable>
 
     <declare-styleable name="RoundImageView">
@@ -69,6 +79,8 @@
         <attr name="rTopRightRadius" />
         <attr name="rBottomLeftRadius" />
         <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
     </declare-styleable>
 
     <declare-styleable name="RoundTextView">
@@ -81,6 +93,8 @@
         <attr name="rTopRightRadius" />
         <attr name="rBottomLeftRadius" />
         <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
     </declare-styleable>
 
     <declare-styleable name="RoundView">
@@ -93,5 +107,35 @@
         <attr name="rTopRightRadius" />
         <attr name="rBottomLeftRadius" />
         <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundButton">
+        <attr name="rRadius" />
+        <attr name="rLeftRadius" />
+        <attr name="rRightRadius" />
+        <attr name="rTopRadius" />
+        <attr name="rBottomRadius" />
+        <attr name="rTopLeftRadius" />
+        <attr name="rTopRightRadius" />
+        <attr name="rBottomLeftRadius" />
+        <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundViewPager">
+        <attr name="rRadius" />
+        <attr name="rLeftRadius" />
+        <attr name="rRightRadius" />
+        <attr name="rTopRadius" />
+        <attr name="rBottomRadius" />
+        <attr name="rTopLeftRadius" />
+        <attr name="rTopRightRadius" />
+        <attr name="rBottomLeftRadius" />
+        <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
     </declare-styleable>
 </resources>

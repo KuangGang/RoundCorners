@@ -32,6 +32,9 @@ public class RoundHelper {
 
     private boolean isCircle;
 
+    private int mStrokeWidth;
+    private int mStrokeColor = Color.WHITE;
+
     public void init(Context context, AttributeSet attrs, View view) {
         // 禁止硬件加速，硬件加速会有一些问题，这里禁用掉
         if (view instanceof ViewGroup && view.getBackground() == null) {
@@ -59,6 +62,8 @@ public class RoundHelper {
         int radiusTopRight = array.getDimensionPixelSize(R.styleable.RoundCorner_rTopRightRadius, radiusTop > 0 ? radiusTop : radiusRight);
         int radiusBottomLeft = array.getDimensionPixelSize(R.styleable.RoundCorner_rBottomLeftRadius, radiusBottom > 0 ? radiusBottom : radiusLeft);
         int radiusBottomRight = array.getDimensionPixelSize(R.styleable.RoundCorner_rBottomRightRadius, radiusBottom > 0 ? radiusBottom : radiusRight);
+        mStrokeWidth = array.getDimensionPixelSize(R.styleable.RoundButton_rStrokeWidth, 0);
+        mStrokeColor = array.getColor(R.styleable.RoundButton_rStrokeColor, mStrokeColor);
 
         array.recycle();
         if (!isCircle) {
@@ -83,7 +88,6 @@ public class RoundHelper {
         }
         mRectF.set(0, 0, width, height);
     }
-
 
     public void drawPath(Canvas canvas) {
         mPaint.reset();
