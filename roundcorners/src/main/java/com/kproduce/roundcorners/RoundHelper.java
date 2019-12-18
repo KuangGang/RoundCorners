@@ -33,7 +33,7 @@ public class RoundHelper {
     private boolean isCircle;
 
     private int mStrokeWidth;
-    private int mStrokeColor = Color.WHITE;
+    private int mStrokeColor;
 
     public void init(Context context, AttributeSet attrs, View view) {
         // 禁止硬件加速，硬件加速会有一些问题，这里禁用掉
@@ -47,6 +47,7 @@ public class RoundHelper {
         mPath = new Path();
         mTempPath = new Path();
         mXfermode = new PorterDuffXfermode(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT ? PorterDuff.Mode.DST_OUT : PorterDuff.Mode.DST_IN);
+        mStrokeColor = Color.WHITE;
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RoundCorner);
         if (array == null) {
