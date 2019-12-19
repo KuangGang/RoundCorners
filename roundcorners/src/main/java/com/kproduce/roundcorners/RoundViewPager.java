@@ -3,7 +3,6 @@ package com.kproduce.roundcorners;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
 /**
@@ -30,10 +29,9 @@ public class RoundViewPager extends ViewPager {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.saveLayer(mHelper.getRectF(), null, Canvas.ALL_SAVE_FLAG);
+        mHelper.preDraw(canvas);
         super.draw(canvas);
         mHelper.drawPath(canvas);
-        canvas.restore();
     }
 
 }

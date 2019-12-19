@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 public class RoundHelper {
 
     private float[] mRadii;
+    private float[] mStrokeRadii;
 
     private Paint mPaint;
     private RectF mRectF;
@@ -32,6 +33,8 @@ public class RoundHelper {
 
     private boolean isCircle;
 
+    private int mWidth;
+    private int mHeight;
     private int mStrokeWidth;
     private int mStrokeColor;
 
@@ -42,6 +45,7 @@ public class RoundHelper {
         }
 
         mRadii = new float[8];
+        mStrokeRadii = new float[8];
         mPaint = new Paint();
         mRectF = new RectF();
         mPath = new Path();
@@ -73,21 +77,39 @@ public class RoundHelper {
     }
 
     private void setRadius(int topLeftDp, int topRightDp, int bottomLeftDp, int bottomRightDp) {
-        mRadii[0] = mRadii[1] = topLeftDp;
-        mRadii[2] = mRadii[3] = topRightDp;
-        mRadii[4] = mRadii[5] = bottomRightDp;
-        mRadii[6] = mRadii[7] = bottomLeftDp;
+        mRadii[0] = mRadii[1] = topLeftDp - mStrokeWidth;
+        mRadii[2] = mRadii[3] = topRightDp - mStrokeWidth;
+        mRadii[4] = mRadii[5] = bottomRightDp - mStrokeWidth;
+        mRadii[6] = mRadii[7] = bottomLeftDp - mStrokeWidth;
+
+        mStrokeRadii[0] = mStrokeRadii[1] = topLeftDp;
+        mStrokeRadii[2] = mStrokeRadii[3] = topRightDp;
+        mStrokeRadii[4] = mStrokeRadii[5] = bottomRightDp;
+        mStrokeRadii[6] = mStrokeRadii[7] = bottomLeftDp;
     }
 
     public void onSizeChanged(int width, int height) {
+        mWidth = width;
+        mHeight = height;
+
         if (isCircle) {
-            int radius = Math.min(height, width) / 2;
+            int radius = Math.min(height, width) / 2 - mStrokeWidth;
             setRadius(radius, radius, radius, radius);
         }
         if (mRectF == null) {
             return;
         }
         mRectF.set(0, 0, width, height);
+    }
+
+    public void preDraw(Canvas canvas) {
+        canvas.saveLayer(mRectF, null, Canvas.ALL_SAVE_FLAG);
+        if (mStrokeWidth > 0) {
+            float sx = 1.0f * (mWidth - 2 * mStrokeWidth) / mWidth;
+            float sy = 1.0f * (mHeight - 2 * mStrokeWidth) / mHeight;
+            // 缩小画布，使图片内容不被borders覆盖
+            canvas.scale(sx, sy, mWidth / 2.0f, mHeight / 2.0f);
+        }
     }
 
     public void drawPath(Canvas canvas) {
@@ -105,6 +127,19 @@ public class RoundHelper {
             mTempPath.op(mPath, Path.Op.DIFFERENCE);
             canvas.drawPath(mTempPath, mPaint);
         } else {
+            canvas.drawPath(mPath, mPaint);
+        }
+        mPaint.setXfermode(null);
+        canvas.restore();
+
+        // draw stroke
+        if (mStrokeWidth > 0) {
+            mPaint.setStyle(Paint.Style.STROKE);
+            mPaint.setStrokeWidth(mStrokeWidth);
+            mPaint.setColor(mStrokeColor);
+
+            mPath.reset();
+            mPath.addRoundRect(mRectF, mStrokeRadii, Path.Direction.CCW);
             canvas.drawPath(mPath, mPaint);
         }
     }

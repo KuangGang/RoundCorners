@@ -36,7 +36,9 @@
                 android:layout_marginTop="40dp"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/ic_test"
-                app:rRadius="30dp" />
+                app:rRadius="30dp"
+                app:rStrokeWidth="1dp"
+                app:rStrokeColor="@android:color/black"/>
 
             <TextView
                 android:layout_width="wrap_content"

@@ -33,10 +33,9 @@ public class RoundView extends View {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.saveLayer(mHelper.getRectF(), null, Canvas.ALL_SAVE_FLAG);
+        mHelper.preDraw(canvas);
         super.draw(canvas);
         mHelper.drawPath(canvas);
-        canvas.restore();
     }
 
 }
