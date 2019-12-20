@@ -8,12 +8,13 @@
 |![](images/07.png)|![](images/01.png)|![](images/02.png)|
 |---|---|---|
 |![](images/04.png)|![](images/05.png)|![](images/06.png)|
-|![](images/03.png)|![](images/08.png)|
+|![](images/03.png)|![](images/08.png)|![](images/09.png)|
 
 ### 特点
 * LinearLayout、RelativeLayout、FrameLayout支持圆角
 * ImageView、TextView、View支持圆角
-* CircleImageView
+* 支持圆形图片：CircleImageView
+* 支持边框，不遮挡图片
 * 使用xml进行配置，使用简单
 * ......
 
@@ -31,7 +32,7 @@ allprojects {
 **Step 2. 添加项目依赖**
 ``` gradle
 dependencies {
-    implementation 'com.github.KuangGang:RoundCorners:1.0.1'
+    implementation 'com.github.KuangGang:RoundCorners:1.0.2'
 }
 ```
 **Step 3. 在布局文件中添加需要的RoundCorners**
@@ -39,8 +40,9 @@ dependencies {
 <com.kproduce.roundcorners.CircleImageView
     android:layout_width="200dp"
     android:layout_height="200dp"
-    android:layout_marginTop="20dp"
-    android:src="@mipmap/ic_test" />
+    android:src="@mipmap/ic_test"
+    app:rStrokeColor="@android:color/holo_red_dark"
+    app:rStrokeWidth="5dp" />
 
 <com.kproduce.roundcorners.RoundImageView
     android:layout_width="200dp"
@@ -63,7 +65,9 @@ dependencies {
     android:layout_width="200dp"
     android:layout_height="200dp"
     app:rTopRightRadius="30dp"
-    app:rBottomRightRadius="30dp">
+    app:rBottomRightRadius="30dp"
+    app:rStrokeColor="@android:color/holo_green_dark"
+    app:rStrokeWidth="5dp">
 
     <View
         android:layout_width="match_parent"
@@ -96,6 +100,8 @@ dependencies {
 |rTopRightRadius|右上角圆角半径|0dp
 |rBottomLeftRadius|左下角圆角半径|0dp
 |rBottomRightRadius|右下角圆角半径|0dp
+|rStrokeWidth|边框宽度|0dp
+|rStrokeColor|边框颜色|Color.WHITE
 
 ### 原理浅解
 [Android View的绘制流程](https://github.com/KuangGang/RoundCorners)。
@@ -107,5 +113,6 @@ View的绘制看一下这篇文章即可，代码版本比较早，但是逻辑�
 ### 版本记录
 |版本号|更新内容|
 |---|---|
+|1.0.2|1.增加边框<br>2.增加RoundButton/RoundViewPager|
 |1.0.1|1.修复低版本系统圆角View黑框问题<br>2.增加CircleImageView|
 |1.0.0|First Version|
