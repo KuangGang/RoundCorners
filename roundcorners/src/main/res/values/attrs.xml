@@ -138,4 +138,9 @@
         <attr name="rStrokeWidth" />
         <attr name="rStrokeColor" />
     </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
+    </declare-styleable>
 </resources>

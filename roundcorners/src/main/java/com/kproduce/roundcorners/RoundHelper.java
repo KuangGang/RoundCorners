@@ -25,6 +25,7 @@ public class RoundHelper {
 
     private Paint mPaint;
     private RectF mRectF;
+    private RectF mStrokeRectF;
 
     private Path mPath;
     private Path mTempPath;
@@ -48,6 +49,7 @@ public class RoundHelper {
         mStrokeRadii = new float[8];
         mPaint = new Paint();
         mRectF = new RectF();
+        mStrokeRectF = new RectF();
         mPath = new Path();
         mTempPath = new Path();
         mXfermode = new PorterDuffXfermode(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT ? PorterDuff.Mode.DST_OUT : PorterDuff.Mode.DST_IN);
@@ -96,10 +98,12 @@ public class RoundHelper {
             int radius = Math.min(height, width) / 2 - mStrokeWidth;
             setRadius(radius, radius, radius, radius);
         }
-        if (mRectF == null) {
-            return;
+        if (mRectF != null) {
+            mRectF.set(0, 0, width, height);
         }
-        mRectF.set(0, 0, width, height);
+        if (mStrokeRectF != null) {
+            mStrokeRectF.set((mStrokeWidth * 1.0f / 2), (mStrokeWidth * 1.0f / 2), width - mStrokeWidth * 1.0f / 2, height - mStrokeWidth * 1.0f / 2);
+        }
     }
 
     public void preDraw(Canvas canvas) {
@@ -139,13 +143,9 @@ public class RoundHelper {
             mPaint.setColor(mStrokeColor);
 
             mPath.reset();
-            mPath.addRoundRect(mRectF, mStrokeRadii, Path.Direction.CCW);
+            mPath.addRoundRect(mStrokeRectF, mStrokeRadii, Path.Direction.CCW);
             canvas.drawPath(mPath, mPaint);
         }
-    }
-
-    public RectF getRectF() {
-        return mRectF;
     }
 
     public void setCircle(boolean isCircle) {

@@ -20,7 +20,9 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="20dp"
-                android:src="@mipmap/ic_test" />
+                android:src="@mipmap/ic_test"
+                app:rStrokeColor="@android:color/holo_red_dark"
+                app:rStrokeWidth="5dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -36,9 +38,7 @@
                 android:layout_marginTop="40dp"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/ic_test"
-                app:rRadius="30dp"
-                app:rStrokeWidth="1dp"
-                app:rStrokeColor="@android:color/black"/>
+                app:rRadius="30dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="40sp"
                 app:rLeftRadius="50dp"
-                app:rRightRadius="50dp"/>
+                app:rRightRadius="50dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -78,7 +78,9 @@
                 android:textColor="@android:color/white"
                 android:textSize="40sp"
                 app:rLeftRadius="20dp"
-                app:rRightRadius="30dp"/>
+                app:rRightRadius="30dp"
+                app:rStrokeColor="@android:color/holo_green_dark"
+                app:rStrokeWidth="5dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -111,7 +113,9 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="40dp"
                 android:orientation="vertical"
-                app:rLeftRadius="30dp">
+                app:rLeftRadius="30dp"
+                app:rStrokeColor="@android:color/darker_gray"
+                app:rStrokeWidth="5dp">
 
                 <View
                     android:layout_width="match_parent"
