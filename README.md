@@ -11,10 +11,11 @@
 |![](images/03.png)|![](images/08.png)|![](images/09.png)|
 
 ### 特点
-* LinearLayout、RelativeLayout、FrameLayout支持圆角
-* ImageView、TextView、View支持圆角
-* 支持圆形图片：CircleImageView
-* 支持边框，不遮挡图片
+* LinearLayout、RelativeLayout、FrameLayout、ViewPager支持圆角
+* ImageView、TextView、View、Button支持圆角
+* CircleImageView（圆形图片）
+* 支持边框（不遮挡图片）
+* 可正常设置ripple（波纹不会突破边框）
 * 使用xml进行配置，使用简单
 * ......
 
