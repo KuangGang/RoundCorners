@@ -105,7 +105,7 @@ dependencies {
 |rStrokeColor|边框颜色|Color.WHITE
 
 ### 原理浅解
-[Android View的绘制流程](https://github.com/KuangGang/RoundCorners)。
+[Android View的绘制流程](https://www.jianshu.com/p/5a71014e7b1b)。
 View的绘制看一下这篇文章即可，代码版本比较早，但是逻辑基本相同。
 1. 使用Path的addRoundRect方法，将需要剪切的圆角半径进行设置。
 2. 所有View和ViewGroup的绘制都需要经过draw方法，在draw结束之后使用第一步的Path进行画布切割。
