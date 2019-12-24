@@ -1,4 +1,4 @@
-package com.kproduce.roundcorners;
+package com.kproduce.roundcorners.util;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -15,13 +15,14 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kproduce.roundcorners.R;
+
 /**
  * @author kuanggang on 2019/12/10
  */
 public class RoundHelper {
 
-    private float[] mRadii;
-    private float[] mStrokeRadii;
+    private View mView;
 
     private Paint mPaint;
     private RectF mRectF;
@@ -34,17 +35,24 @@ public class RoundHelper {
 
     private boolean isCircle;
 
+    private float[] mRadii;
+    private float[] mStrokeRadii;
+
     private int mWidth;
     private int mHeight;
     private int mStrokeWidth;
     private int mStrokeColor;
 
+    private int mRadiusTopLeft;
+    private int mRadiusTopRight;
+    private int mRadiusBottomLeft;
+    private int mRadiusBottomRight;
+
     public void init(Context context, AttributeSet attrs, View view) {
-        // 禁止硬件加速，硬件加速会有一些问题，这里禁用掉
         if (view instanceof ViewGroup && view.getBackground() == null) {
             view.setBackgroundColor(Color.parseColor("#00000000"));
         }
-
+        mView = view;
         mRadii = new float[8];
         mStrokeRadii = new float[8];
         mPaint = new Paint();
@@ -65,29 +73,30 @@ public class RoundHelper {
         int radiusTop = array.getDimensionPixelSize(R.styleable.RoundCorner_rTopRadius, radius);
         int radiusBottom = array.getDimensionPixelSize(R.styleable.RoundCorner_rBottomRadius, radius);
 
-        int radiusTopLeft = array.getDimensionPixelSize(R.styleable.RoundCorner_rTopLeftRadius, radiusTop > 0 ? radiusTop : radiusLeft);
-        int radiusTopRight = array.getDimensionPixelSize(R.styleable.RoundCorner_rTopRightRadius, radiusTop > 0 ? radiusTop : radiusRight);
-        int radiusBottomLeft = array.getDimensionPixelSize(R.styleable.RoundCorner_rBottomLeftRadius, radiusBottom > 0 ? radiusBottom : radiusLeft);
-        int radiusBottomRight = array.getDimensionPixelSize(R.styleable.RoundCorner_rBottomRightRadius, radiusBottom > 0 ? radiusBottom : radiusRight);
+        mRadiusTopLeft = array.getDimensionPixelSize(R.styleable.RoundCorner_rTopLeftRadius, radiusTop > 0 ? radiusTop : radiusLeft);
+        mRadiusTopRight = array.getDimensionPixelSize(R.styleable.RoundCorner_rTopRightRadius, radiusTop > 0 ? radiusTop : radiusRight);
+        mRadiusBottomLeft = array.getDimensionPixelSize(R.styleable.RoundCorner_rBottomLeftRadius, radiusBottom > 0 ? radiusBottom : radiusLeft);
+        mRadiusBottomRight = array.getDimensionPixelSize(R.styleable.RoundCorner_rBottomRightRadius, radiusBottom > 0 ? radiusBottom : radiusRight);
+
         mStrokeWidth = array.getDimensionPixelSize(R.styleable.RoundButton_rStrokeWidth, 0);
         mStrokeColor = array.getColor(R.styleable.RoundButton_rStrokeColor, mStrokeColor);
 
         array.recycle();
         if (!isCircle) {
-            setRadius(radiusTopLeft, radiusTopRight, radiusBottomLeft, radiusBottomRight);
+            setRadius();
         }
     }
 
-    private void setRadius(int topLeftDp, int topRightDp, int bottomLeftDp, int bottomRightDp) {
-        mRadii[0] = mRadii[1] = topLeftDp - mStrokeWidth;
-        mRadii[2] = mRadii[3] = topRightDp - mStrokeWidth;
-        mRadii[4] = mRadii[5] = bottomRightDp - mStrokeWidth;
-        mRadii[6] = mRadii[7] = bottomLeftDp - mStrokeWidth;
+    private void setRadius() {
+        mRadii[0] = mRadii[1] = mRadiusTopLeft - mStrokeWidth;
+        mRadii[2] = mRadii[3] = mRadiusTopRight - mStrokeWidth;
+        mRadii[4] = mRadii[5] = mRadiusBottomRight - mStrokeWidth;
+        mRadii[6] = mRadii[7] = mRadiusBottomLeft - mStrokeWidth;
 
-        mStrokeRadii[0] = mStrokeRadii[1] = topLeftDp;
-        mStrokeRadii[2] = mStrokeRadii[3] = topRightDp;
-        mStrokeRadii[4] = mStrokeRadii[5] = bottomRightDp;
-        mStrokeRadii[6] = mStrokeRadii[7] = bottomLeftDp;
+        mStrokeRadii[0] = mStrokeRadii[1] = mRadiusTopLeft;
+        mStrokeRadii[2] = mStrokeRadii[3] = mRadiusTopRight;
+        mStrokeRadii[4] = mStrokeRadii[5] = mRadiusBottomRight;
+        mStrokeRadii[6] = mStrokeRadii[7] = mRadiusBottomLeft;
     }
 
     public void onSizeChanged(int width, int height) {
@@ -96,7 +105,11 @@ public class RoundHelper {
 
         if (isCircle) {
             int radius = Math.min(height, width) / 2 - mStrokeWidth;
-            setRadius(radius, radius, radius, radius);
+            mRadiusTopLeft = radius;
+            mRadiusTopRight = radius;
+            mRadiusBottomRight = radius;
+            mRadiusBottomLeft = radius;
+            setRadius();
         }
         if (mRectF != null) {
             mRectF.set(0, 0, width, height);
@@ -150,5 +163,111 @@ public class RoundHelper {
 
     public void setCircle(boolean isCircle) {
         this.isCircle = isCircle;
+    }
+
+    public void setRadius(int radius) {
+        mRadiusTopLeft = radius;
+        mRadiusTopRight = radius;
+        mRadiusBottomLeft = radius;
+        mRadiusBottomRight = radius;
+        if (mView != null) {
+            mView.invalidate();
+        }
+    }
+
+    public void setRadius(int radiusTopLeft, int radiusTopRight, int radiusBottomLeft, int radiusBottomRight) {
+        mRadiusTopLeft = radiusTopLeft;
+        mRadiusTopRight = radiusTopRight;
+        mRadiusBottomLeft = radiusBottomLeft;
+        mRadiusBottomRight = radiusBottomRight;
+        if (mView != null) {
+            mView.invalidate();
+        }
+    }
+
+    public void setRadiusLeft(int radius) {
+        mRadiusTopLeft = radius;
+        mRadiusBottomLeft = radius;
+        if (mView != null) {
+            mView.invalidate();
+        }
+    }
+
+    public void setRadiusRight(int radius) {
+        mRadiusTopRight = radius;
+        mRadiusBottomRight = radius;
+        if (mView != null) {
+            mView.invalidate();
+        }
+    }
+
+    public void setRadiusTop(int radius) {
+        mRadiusTopLeft = radius;
+        mRadiusTopRight = radius;
+        if (mView != null) {
+            mView.invalidate();
+        }
+    }
+
+    public void setRadiusBottom(int radius) {
+        mRadiusBottomLeft = radius;
+        mRadiusBottomRight = radius;
+        if (mView != null) {
+            mView.invalidate();
+        }
+    }
+
+    public void setRadiusTopLeft(int radius) {
+        mRadiusTopLeft = radius;
+        if (mView != null) {
+            mView.invalidate();
+        }
+    }
+
+    public void setRadiusTopRight(int radius) {
+        mRadiusTopRight = radius;
+        if (mView != null) {
+            mView.invalidate();
+        }
+    }
+
+    public void setRadiusBottomLeft(int radius) {
+        mRadiusBottomLeft = radius;
+        if (mView != null) {
+            mView.invalidate();
+        }
+    }
+
+    public void setRadiusBottomRight(int radius) {
+        mRadiusBottomRight = radius;
+        if (mView != null) {
+            mView.invalidate();
+        }
+    }
+
+    public void setStrokeWidth(int width) {
+        mStrokeWidth = width;
+        if (mView != null) {
+            setRadius();
+            onSizeChanged(mWidth, mHeight);
+            mView.invalidate();
+        }
+    }
+
+    public void setStrokeColor(int color) {
+        mStrokeColor = color;
+        if (mView != null) {
+            mView.invalidate();
+        }
+    }
+
+    public void setStrokeWidthColor(int width, int color) {
+        mStrokeWidth = width;
+        mStrokeColor = color;
+        if (mView != null) {
+            setRadius();
+            onSizeChanged(mWidth, mHeight);
+            mView.invalidate();
+        }
     }
 }
