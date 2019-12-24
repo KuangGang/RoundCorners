@@ -8,7 +8,7 @@
 |![](images/07.png)|![](images/01.png)|![](images/02.png)|
 |---|---|---|
 |![](images/04.png)|![](images/05.png)|![](images/06.png)|
-|![](images/03.png)|![](images/08.png)|![](images/09.png)|
+|![](images/03.png)|![](images/08.png)|
 
 ### 特点
 * LinearLayout、RelativeLayout、FrameLayout、ViewPager支持圆角
@@ -16,7 +16,7 @@
 * CircleImageView（圆形图片）
 * 支持边框（不遮挡图片）
 * 可正常设置ripple（波纹不会突破边框）
-* 使用xml进行配置，使用简单
+* 使用 **xml** 或者 **代码** 进行配置，使用简单
 * ......
 
 ### 基本用法
@@ -33,7 +33,7 @@ allprojects {
 **Step 2. 添加项目依赖**
 ``` gradle
 dependencies {
-    implementation 'com.github.KuangGang:RoundCorners:1.0.2'
+    implementation 'com.github.KuangGang:RoundCorners:1.0.3'
 }
 ```
 **Step 3. 在布局文件中添加需要的RoundCorners**
@@ -90,19 +90,19 @@ dependencies {
 ```
 
 ### 支持的属性、方法
-|属性名|含义|默认值
-|---|---|---|
-|rRadius|统一设置四个角的圆角半径|0dp
-|rLeftRadius|左边两个角圆角半径|0dp
-|rRightRadius|右边两个角圆角半径|0dp
-|rTopRadius|上边两个角圆角半径|0dp
-|rBottomRadius|下边两个角圆角半径|0dp
-|rTopLeftRadius|左上角圆角半径|0dp
-|rTopRightRadius|右上角圆角半径|0dp
-|rBottomLeftRadius|左下角圆角半径|0dp
-|rBottomRightRadius|右下角圆角半径|0dp
-|rStrokeWidth|边框宽度|0dp
-|rStrokeColor|边框颜色|Color.WHITE
+|属性名|含义|默认值|方法
+|---|---|---|---|
+|rRadius|统一设置四个角的圆角半径|0dp|setRadius(int radius)
+|rLeftRadius|左边两个角圆角半径|0dp|setRadiusLeft(int radius)
+|rRightRadius|右边两个角圆角半径|0dp|setRadiusRight(int radius)
+|rTopRadius|上边两个角圆角半径|0dp|setRadiusTop(int radius)
+|rBottomRadius|下边两个角圆角半径|0dp|setRadiusBottom(int radius)
+|rTopLeftRadius|左上角圆角半径|0dp|setRadiusTopLeft(int radius)
+|rTopRightRadius|右上角圆角半径|0dp|setRadiusTopRight(int radius)
+|rBottomLeftRadius|左下角圆角半径|0dp|setRadiusBottomLeft(int radius)
+|rBottomRightRadius|右下角圆角半径|0dp|setRadiusBottomRight(int radius)
+|rStrokeWidth|边框宽度|0dp|setStrokeWidth(int width)
+|rStrokeColor|边框颜色|Color.WHITE|setStrokeColor(int color)
 
 ### 原理浅解
 [Android View的绘制流程](https://www.jianshu.com/p/5a71014e7b1b)。
@@ -114,6 +114,7 @@ View的绘制看一下这篇文章即可，代码版本比较早，但是逻辑�
 ### 版本记录
 |版本号|更新内容|
 |---|---|
+|1.0.3|增加代码设置属性|
 |1.0.2|1.增加边框<br>2.增加RoundButton/RoundViewPager|
 |1.0.1|1.修复低版本系统圆角View黑框问题<br>2.增加CircleImageView|
 |1.0.0|First Version|
