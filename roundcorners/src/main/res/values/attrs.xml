@@ -125,20 +125,6 @@
         <attr name="rStrokeColor" />
     </declare-styleable>
 
-    <declare-styleable name="RoundViewPager">
-        <attr name="rRadius" />
-        <attr name="rLeftRadius" />
-        <attr name="rRightRadius" />
-        <attr name="rTopRadius" />
-        <attr name="rBottomRadius" />
-        <attr name="rTopLeftRadius" />
-        <attr name="rTopRightRadius" />
-        <attr name="rBottomLeftRadius" />
-        <attr name="rBottomRightRadius" />
-        <attr name="rStrokeWidth" />
-        <attr name="rStrokeColor" />
-    </declare-styleable>
-
     <declare-styleable name="CircleImageView">
         <attr name="rStrokeWidth" />
         <attr name="rStrokeColor" />
