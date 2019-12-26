@@ -4,29 +4,29 @@ package com.kproduce.roundcorners.util;
  * @author kuanggang
  */
 public interface RoundMethodInterface {
-    void setRadius(int radius);
+    void setRadius(float radiusDp);
 
-    void setRadius(int radiusTopLeft, int radiusTopRight, int radiusBottomLeft, int radiusBottomRight);
+    void setRadius(float radiusTopLeftDp, float radiusTopRightDp, float radiusBottomLeftDp, float radiusBottomRightDp);
 
-    void setRadiusLeft(int radius);
+    void setRadiusLeft(float radiusDp);
 
-    void setRadiusRight(int radius);
+    void setRadiusRight(float radiusDp);
 
-    void setRadiusTop(int radius);
+    void setRadiusTop(float radiusDp);
 
-    void setRadiusBottom(int radius);
+    void setRadiusBottom(float radiusDp);
 
-    void setRadiusTopLeft(int radius);
+    void setRadiusTopLeft(float radiusDp);
 
-    void setRadiusTopRight(int radius);
+    void setRadiusTopRight(float radiusDp);
 
-    void setRadiusBottomLeft(int radius);
+    void setRadiusBottomLeft(float radiusDp);
 
-    void setRadiusBottomRight(int radius);
+    void setRadiusBottomRight(float radiusDp);
 
-    void setStrokeWidth(int width);
+    void setStrokeWidth(float widthDp);
 
     void setStrokeColor(int color);
 
-    void setStrokeWidthColor(int width, int color);
+    void setStrokeWidthColor(float widthDp, int color);
 }

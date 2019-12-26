@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <com.kproduce.roundcorners.RoundViewPager
+        android:id="@+id/rvp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

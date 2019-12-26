@@ -42,58 +42,58 @@ public class RoundView extends View implements RoundMethodInterface {
     }
 
     @Override
-    public void setRadius(int radius) {
-        mHelper.setRadius(radius);
+    public void setRadius(float radiusDp) {
+        mHelper.setRadius(radiusDp);
     }
 
     @Override
-    public void setRadius(int radiusTopLeft, int radiusTopRight, int radiusBottomLeft, int radiusBottomRight) {
-        mHelper.setRadius(radiusTopLeft, radiusTopRight, radiusBottomLeft, radiusBottomRight);
+    public void setRadius(float radiusTopLeftDp, float radiusTopRightDp, float radiusBottomLeftDp, float radiusBottomRightDp) {
+        mHelper.setRadius(radiusTopLeftDp, radiusTopRightDp, radiusBottomLeftDp, radiusBottomRightDp);
     }
 
     @Override
-    public void setRadiusLeft(int radius) {
-        mHelper.setRadiusLeft(radius);
+    public void setRadiusLeft(float radiusDp) {
+        mHelper.setRadiusLeft(radiusDp);
     }
 
     @Override
-    public void setRadiusRight(int radius) {
-        mHelper.setRadiusRight(radius);
+    public void setRadiusRight(float radiusDp) {
+        mHelper.setRadiusRight(radiusDp);
     }
 
     @Override
-    public void setRadiusTop(int radius) {
-        mHelper.setRadiusTop(radius);
+    public void setRadiusTop(float radiusDp) {
+        mHelper.setRadiusTop(radiusDp);
     }
 
     @Override
-    public void setRadiusBottom(int radius) {
-        mHelper.setRadiusBottom(radius);
+    public void setRadiusBottom(float radiusDp) {
+        mHelper.setRadiusBottom(radiusDp);
     }
 
     @Override
-    public void setRadiusTopLeft(int radius) {
-        mHelper.setRadiusTopLeft(radius);
+    public void setRadiusTopLeft(float radiusDp) {
+        mHelper.setRadiusTopLeft(radiusDp);
     }
 
     @Override
-    public void setRadiusTopRight(int radius) {
-        mHelper.setRadiusTopRight(radius);
+    public void setRadiusTopRight(float radiusDp) {
+        mHelper.setRadiusTopRight(radiusDp);
     }
 
     @Override
-    public void setRadiusBottomLeft(int radius) {
-        mHelper.setRadiusBottomLeft(radius);
+    public void setRadiusBottomLeft(float radiusDp) {
+        mHelper.setRadiusBottomLeft(radiusDp);
     }
 
     @Override
-    public void setRadiusBottomRight(int radius) {
-        mHelper.setRadiusBottomRight(radius);
+    public void setRadiusBottomRight(float radiusDp) {
+        mHelper.setRadiusBottomRight(radiusDp);
     }
 
     @Override
-    public void setStrokeWidth(int width) {
-        mHelper.setStrokeWidth(width);
+    public void setStrokeWidth(float widthDp) {
+        mHelper.setStrokeWidth(widthDp);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class RoundView extends View implements RoundMethodInterface {
     }
 
     @Override
-    public void setStrokeWidthColor(int width, int color) {
-        mHelper.setStrokeWidthColor(width, color);
+    public void setStrokeWidthColor(float widthDp, int color) {
+        mHelper.setStrokeWidthColor(widthDp, color);
     }
 }

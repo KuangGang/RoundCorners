@@ -22,6 +22,7 @@ import com.kproduce.roundcorners.R;
  */
 public class RoundHelper {
 
+    private Context mContext;
     private View mView;
 
     private Paint mPaint;
@@ -40,18 +41,19 @@ public class RoundHelper {
 
     private int mWidth;
     private int mHeight;
-    private int mStrokeWidth;
     private int mStrokeColor;
+    private float mStrokeWidth;
 
-    private int mRadiusTopLeft;
-    private int mRadiusTopRight;
-    private int mRadiusBottomLeft;
-    private int mRadiusBottomRight;
+    private float mRadiusTopLeft;
+    private float mRadiusTopRight;
+    private float mRadiusBottomLeft;
+    private float mRadiusBottomRight;
 
     public void init(Context context, AttributeSet attrs, View view) {
         if (view instanceof ViewGroup && view.getBackground() == null) {
             view.setBackgroundColor(Color.parseColor("#00000000"));
         }
+        mContext = context;
         mView = view;
         mRadii = new float[8];
         mStrokeRadii = new float[8];
@@ -67,18 +69,18 @@ public class RoundHelper {
         if (array == null) {
             return;
         }
-        int radius = array.getDimensionPixelSize(R.styleable.RoundCorner_rRadius, 0);
-        int radiusLeft = array.getDimensionPixelSize(R.styleable.RoundCorner_rLeftRadius, radius);
-        int radiusRight = array.getDimensionPixelSize(R.styleable.RoundCorner_rRightRadius, radius);
-        int radiusTop = array.getDimensionPixelSize(R.styleable.RoundCorner_rTopRadius, radius);
-        int radiusBottom = array.getDimensionPixelSize(R.styleable.RoundCorner_rBottomRadius, radius);
+        float radius = array.getDimension(R.styleable.RoundCorner_rRadius, 0);
+        float radiusLeft = array.getDimension(R.styleable.RoundCorner_rLeftRadius, radius);
+        float radiusRight = array.getDimension(R.styleable.RoundCorner_rRightRadius, radius);
+        float radiusTop = array.getDimension(R.styleable.RoundCorner_rTopRadius, radius);
+        float radiusBottom = array.getDimension(R.styleable.RoundCorner_rBottomRadius, radius);
 
-        mRadiusTopLeft = array.getDimensionPixelSize(R.styleable.RoundCorner_rTopLeftRadius, radiusTop > 0 ? radiusTop : radiusLeft);
-        mRadiusTopRight = array.getDimensionPixelSize(R.styleable.RoundCorner_rTopRightRadius, radiusTop > 0 ? radiusTop : radiusRight);
-        mRadiusBottomLeft = array.getDimensionPixelSize(R.styleable.RoundCorner_rBottomLeftRadius, radiusBottom > 0 ? radiusBottom : radiusLeft);
-        mRadiusBottomRight = array.getDimensionPixelSize(R.styleable.RoundCorner_rBottomRightRadius, radiusBottom > 0 ? radiusBottom : radiusRight);
+        mRadiusTopLeft = array.getDimension(R.styleable.RoundCorner_rTopLeftRadius, radiusTop > 0 ? radiusTop : radiusLeft);
+        mRadiusTopRight = array.getDimension(R.styleable.RoundCorner_rTopRightRadius, radiusTop > 0 ? radiusTop : radiusRight);
+        mRadiusBottomLeft = array.getDimension(R.styleable.RoundCorner_rBottomLeftRadius, radiusBottom > 0 ? radiusBottom : radiusLeft);
+        mRadiusBottomRight = array.getDimension(R.styleable.RoundCorner_rBottomRightRadius, radiusBottom > 0 ? radiusBottom : radiusRight);
 
-        mStrokeWidth = array.getDimensionPixelSize(R.styleable.RoundButton_rStrokeWidth, 0);
+        mStrokeWidth = array.getDimension(R.styleable.RoundButton_rStrokeWidth, 0);
         mStrokeColor = array.getColor(R.styleable.RoundButton_rStrokeColor, mStrokeColor);
 
         array.recycle();
@@ -104,7 +106,7 @@ public class RoundHelper {
         mHeight = height;
 
         if (isCircle) {
-            int radius = Math.min(height, width) / 2 - mStrokeWidth;
+            float radius = Math.min(height, width) * 1f / 2 - mStrokeWidth;
             mRadiusTopLeft = radius;
             mRadiusTopRight = radius;
             mRadiusBottomRight = radius;
@@ -115,15 +117,15 @@ public class RoundHelper {
             mRectF.set(0, 0, width, height);
         }
         if (mStrokeRectF != null) {
-            mStrokeRectF.set((mStrokeWidth * 1.0f / 2), (mStrokeWidth * 1.0f / 2), width - mStrokeWidth * 1.0f / 2, height - mStrokeWidth * 1.0f / 2);
+            mStrokeRectF.set((mStrokeWidth / 2), (mStrokeWidth / 2), width - mStrokeWidth / 2, height - mStrokeWidth / 2);
         }
     }
 
     public void preDraw(Canvas canvas) {
         canvas.saveLayer(mRectF, null, Canvas.ALL_SAVE_FLAG);
         if (mStrokeWidth > 0) {
-            float sx = 1.0f * (mWidth - 2 * mStrokeWidth) / mWidth;
-            float sy = 1.0f * (mHeight - 2 * mStrokeWidth) / mHeight;
+            float sx = (mWidth - 2 * mStrokeWidth) / mWidth;
+            float sy = (mHeight - 2 * mStrokeWidth) / mHeight;
             // 缩小画布，使图片内容不被borders覆盖
             canvas.scale(sx, sy, mWidth / 2.0f, mHeight / 2.0f);
         }
@@ -165,88 +167,126 @@ public class RoundHelper {
         this.isCircle = isCircle;
     }
 
-    public void setRadius(int radius) {
-        mRadiusTopLeft = radius;
-        mRadiusTopRight = radius;
-        mRadiusBottomLeft = radius;
-        mRadiusBottomRight = radius;
+    public void setRadius(float radiusDp) {
+        if (mContext == null) {
+            return;
+        }
+        float radiusPx = DensityUtil.dip2px(mContext, radiusDp);
+        mRadiusTopLeft = radiusPx;
+        mRadiusTopRight = radiusPx;
+        mRadiusBottomLeft = radiusPx;
+        mRadiusBottomRight = radiusPx;
         if (mView != null) {
             mView.invalidate();
         }
     }
 
-    public void setRadius(int radiusTopLeft, int radiusTopRight, int radiusBottomLeft, int radiusBottomRight) {
-        mRadiusTopLeft = radiusTopLeft;
-        mRadiusTopRight = radiusTopRight;
-        mRadiusBottomLeft = radiusBottomLeft;
-        mRadiusBottomRight = radiusBottomRight;
+    public void setRadius(float radiusTopLeftDp, float radiusTopRightDp, float radiusBottomLeftDp, float radiusBottomRightDp) {
+        if (mContext == null) {
+            return;
+        }
+        mRadiusTopLeft = DensityUtil.dip2px(mContext, radiusTopLeftDp);
+        mRadiusTopRight = DensityUtil.dip2px(mContext, radiusTopRightDp);
+        mRadiusBottomLeft = DensityUtil.dip2px(mContext, radiusBottomLeftDp);
+        mRadiusBottomRight = DensityUtil.dip2px(mContext, radiusBottomRightDp);
         if (mView != null) {
             mView.invalidate();
         }
     }
 
-    public void setRadiusLeft(int radius) {
-        mRadiusTopLeft = radius;
-        mRadiusBottomLeft = radius;
+    public void setRadiusLeft(float radiusDp) {
+        if (mContext == null) {
+            return;
+        }
+        float radiusPx = DensityUtil.dip2px(mContext, radiusDp);
+        mRadiusTopLeft = radiusPx;
+        mRadiusBottomLeft = radiusPx;
         if (mView != null) {
             mView.invalidate();
         }
     }
 
-    public void setRadiusRight(int radius) {
-        mRadiusTopRight = radius;
-        mRadiusBottomRight = radius;
+    public void setRadiusRight(float radiusDp) {
+        if (mContext == null) {
+            return;
+        }
+        float radiusPx = DensityUtil.dip2px(mContext, radiusDp);
+        mRadiusTopRight = radiusPx;
+        mRadiusBottomRight = radiusPx;
         if (mView != null) {
             mView.invalidate();
         }
     }
 
-    public void setRadiusTop(int radius) {
-        mRadiusTopLeft = radius;
-        mRadiusTopRight = radius;
+    public void setRadiusTop(float radiusDp) {
+        if (mContext == null) {
+            return;
+        }
+        float radiusPx = DensityUtil.dip2px(mContext, radiusDp);
+        mRadiusTopLeft = radiusPx;
+        mRadiusTopRight = radiusPx;
         if (mView != null) {
             mView.invalidate();
         }
     }
 
-    public void setRadiusBottom(int radius) {
-        mRadiusBottomLeft = radius;
-        mRadiusBottomRight = radius;
+    public void setRadiusBottom(float radiusDp) {
+        if (mContext == null) {
+            return;
+        }
+        float radiusPx = DensityUtil.dip2px(mContext, radiusDp);
+        mRadiusBottomLeft = radiusPx;
+        mRadiusBottomRight = radiusPx;
         if (mView != null) {
             mView.invalidate();
         }
     }
 
-    public void setRadiusTopLeft(int radius) {
-        mRadiusTopLeft = radius;
+    public void setRadiusTopLeft(float radiusDp) {
+        if (mContext == null) {
+            return;
+        }
+        mRadiusTopLeft = DensityUtil.dip2px(mContext, radiusDp);
         if (mView != null) {
             mView.invalidate();
         }
     }
 
-    public void setRadiusTopRight(int radius) {
-        mRadiusTopRight = radius;
+    public void setRadiusTopRight(float radiusDp) {
+        if (mContext == null) {
+            return;
+        }
+        mRadiusTopRight = DensityUtil.dip2px(mContext, radiusDp);
         if (mView != null) {
             mView.invalidate();
         }
     }
 
-    public void setRadiusBottomLeft(int radius) {
-        mRadiusBottomLeft = radius;
+    public void setRadiusBottomLeft(float radiusDp) {
+        if (mContext == null) {
+            return;
+        }
+        mRadiusBottomLeft = DensityUtil.dip2px(mContext, radiusDp);
         if (mView != null) {
             mView.invalidate();
         }
     }
 
-    public void setRadiusBottomRight(int radius) {
-        mRadiusBottomRight = radius;
+    public void setRadiusBottomRight(float radiusDp) {
+        if (mContext == null) {
+            return;
+        }
+        mRadiusBottomRight = DensityUtil.dip2px(mContext, radiusDp);
         if (mView != null) {
             mView.invalidate();
         }
     }
 
-    public void setStrokeWidth(int width) {
-        mStrokeWidth = width;
+    public void setStrokeWidth(float widthDp) {
+        if (mContext == null) {
+            return;
+        }
+        mStrokeWidth = DensityUtil.dip2px(mContext, widthDp);
         if (mView != null) {
             setRadius();
             onSizeChanged(mWidth, mHeight);
@@ -261,8 +301,11 @@ public class RoundHelper {
         }
     }
 
-    public void setStrokeWidthColor(int width, int color) {
-        mStrokeWidth = width;
+    public void setStrokeWidthColor(float widthDp, int color) {
+        if (mContext == null) {
+            return;
+        }
+        mStrokeWidth = DensityUtil.dip2px(mContext, widthDp);
         mStrokeColor = color;
         if (mView != null) {
             setRadius();

@@ -2,10 +2,13 @@ package com.kproduce.roundcorners.test;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.kproduce.roundcorners.RoundTextView;
+import com.kproduce.roundcorners.RoundViewPager;
 
 /**
  * @author kuanggang on 2019/12/01
@@ -21,9 +24,11 @@ public class MainActivity extends AppCompatActivity {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv.setRadius(50, 0, 0, 0);
-                tv.setStrokeWidthColor(20, getResources().getColor(android.R.color.holo_green_dark));
+                tv.setRadius(10, 0, 0, 0);
+                tv.setStrokeWidthColor(5, getResources().getColor(android.R.color.holo_green_dark));
             }
         });
+
+        RoundViewPager vp= findViewById(R.id.rvp);
     }
 }
