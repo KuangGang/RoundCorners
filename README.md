@@ -8,10 +8,10 @@
 |![](images/07.png)|![](images/01.png)|![](images/02.png)|
 |---|---|---|
 |![](images/04.png)|![](images/05.png)|![](images/06.png)|
-|![](images/03.png)|![](images/08.png)|
+|![](images/03.png)|![](images/08.png)|![](images/09.png)|
 
 ### 特点
-* LinearLayout、RelativeLayout、FrameLayout、ViewPager支持圆角
+* LinearLayout、RelativeLayout、FrameLayout支持圆角
 * ImageView、TextView、View、Button支持圆角
 * CircleImageView（圆形图片）
 * 支持边框（不遮挡图片）
@@ -33,7 +33,7 @@ allprojects {
 **Step 2. 添加项目依赖**
 ``` gradle
 dependencies {
-    implementation 'com.github.KuangGang:RoundCorners:1.0.3'
+    implementation 'com.github.KuangGang:RoundCorners:1.0.4'
 }
 ```
 **Step 3. 在布局文件中添加需要的RoundCorners**
@@ -114,6 +114,7 @@ View的绘制看一下这篇文章即可，代码版本比较早，但是逻辑�
 ### 版本记录
 |版本号|更新内容|
 |---|---|
+|1.0.4|1.代码设置圆角、边框尺寸支持浮点型<br>2.删除RoundViewPager|
 |1.0.3|增加代码设置属性|
 |1.0.2|1.增加边框<br>2.增加RoundButton/RoundViewPager|
 |1.0.1|1.修复低版本系统圆角View黑框问题<br>2.增加CircleImageView|
