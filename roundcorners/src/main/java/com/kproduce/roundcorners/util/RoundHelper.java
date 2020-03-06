@@ -62,7 +62,7 @@ public class RoundHelper {
         mStrokeRectF = new RectF();
         mPath = new Path();
         mTempPath = new Path();
-        mXfermode = new PorterDuffXfermode(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT ? PorterDuff.Mode.DST_OUT : PorterDuff.Mode.DST_IN);
+        mXfermode = new PorterDuffXfermode(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PorterDuff.Mode.DST_OUT : PorterDuff.Mode.DST_IN);
         mStrokeColor = Color.WHITE;
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RoundCorner);
