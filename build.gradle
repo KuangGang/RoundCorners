@@ -8,8 +8,8 @@ buildscript {
 
         min_sdk_version = 16
         target_sdk_version = 28
-        version_code = 5
-        version_name = '1.0.4'
+        version_code = 6
+        version_name = '1.0.5'
     }
 
     repositories {
