@@ -1,7 +1,7 @@
 package com.kproduce.roundcorners.util;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * @author KG on 2017/6/5.

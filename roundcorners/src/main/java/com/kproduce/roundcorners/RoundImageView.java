@@ -2,8 +2,9 @@ package com.kproduce.roundcorners;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.kproduce.roundcorners.util.RoundHelper;
 import com.kproduce.roundcorners.util.RoundMethodInterface;
