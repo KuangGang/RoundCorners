@@ -36,7 +36,7 @@ allprojects {
 **Step 2. 添加项目依赖**
 ``` gradle
 dependencies {
-    implementation 'com.github.KuangGang:RoundCorners:1.0.6'
+    implementation 'com.github.KuangGang:RoundCorners:1.1.0'
 }
 ```
 **Step 3. 在布局文件中添加需要的RoundCorners**
@@ -45,7 +45,7 @@ dependencies {
     android:layout_width="200dp"
     android:layout_height="200dp"
     android:src="@mipmap/ic_test"
-    app:rStrokeColor="@android:color/holo_red_dark"
+    app:rStrokeColor="#FF3333"
     app:rStrokeWidth="5dp" />
 
 <com.kproduce.roundcorners.RoundImageView
@@ -105,7 +105,7 @@ dependencies {
 |rBottomLeftRadius|左下角圆角半径|0dp|setRadiusBottomLeft(int radius)
 |rBottomRightRadius|右下角圆角半径|0dp|setRadiusBottomRight(int radius)
 |rStrokeWidth|边框宽度|0dp|setStrokeWidth(int width)
-|rStrokeColor|边框颜色|Color.WHITE|setStrokeColor(int color)
+|rStrokeColor|边框颜色|Color.WHITE or #FFFFFF|setStrokeColor(int color)
 
 ### 原理浅解
 [Android View的绘制流程](https://www.jianshu.com/p/5a71014e7b1b)。
@@ -117,6 +117,7 @@ View的绘制看一下这篇文章即可，代码版本比较早，但是逻辑�
 ### 版本记录
 |版本号|更新内容|
 |---|---|
+|1.1.0|边框颜色支持十六进制(#FFFFFF)|
 |1.0.6|修复Oppo等5.0\5.1系统手机崩溃问题|
 |1.0.4|1.代码设置圆角、边框尺寸支持浮点型<br>2.删除RoundViewPager|
 |1.0.3|增加代码设置属性|
