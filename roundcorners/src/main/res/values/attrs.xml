@@ -10,7 +10,7 @@
     <attr name="rBottomLeftRadius" format="dimension" />
     <attr name="rBottomRightRadius" format="dimension" />
     <attr name="rStrokeWidth" format="dimension" />
-    <attr name="rStrokeColor" format="reference" />
+    <attr name="rStrokeColor" format="reference|color" />
 
     <declare-styleable name="RoundCorner">
         <attr name="rRadius" />

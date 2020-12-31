@@ -21,7 +21,7 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="20dp"
                 android:src="@mipmap/ic_test"
-                app:rStrokeColor="@android:color/holo_red_dark"
+                app:rStrokeColor="#FF3333"
                 app:rStrokeWidth="5dp" />
 
             <TextView
