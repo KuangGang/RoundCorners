@@ -36,7 +36,7 @@ allprojects {
 **Step 2. 添加项目依赖**
 ``` gradle
 dependencies {
-    implementation 'com.github.KuangGang:RoundCorners:1.1.0'
+    implementation 'com.github.xingfude123:RoundCorners:1.1.1'
 }
 ```
 **Step 3. 在布局文件中添加需要的RoundCorners**
@@ -117,6 +117,7 @@ View的绘制看一下这篇文章即可，代码版本比较早，但是逻辑�
 ### 版本记录
 |版本号|更新内容|
 |---|---|
+|1.1.1|添加RoundConstraintLayout|
 |1.1.0|边框颜色支持十六进制(#FFFFFF)|
 |1.0.6|修复Oppo等5.0\5.1系统手机崩溃问题|
 |1.0.4|1.代码设置圆角、边框尺寸支持浮点型<br>2.删除RoundViewPager|
