@@ -17,7 +17,7 @@
 * LinearLayout、RelativeLayout、FrameLayout、ConstraintLayout支持圆角
 * ImageView、TextView、View、Button支持圆角
 * CircleImageView（圆形图片）
-* 支持边框（不遮挡图片）
+* 支持边框
 * 可正常设置ripple（波纹不会突破边框）
 * 使用 **xml** 或者 **代码** 进行配置，使用简单
 * ......
