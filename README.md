@@ -1,7 +1,5 @@
 # RoundCorners
 
-### 祝大家2021年少一点泪水，多一些回报，努力的都能实现！
-
 比较常用的ViewGroup和View的圆角实现，一发治好设计的圆角病。
 
 ### [Demo](https://fir.im/gfhw)
