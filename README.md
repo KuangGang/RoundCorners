@@ -14,7 +14,7 @@
 |![](images/03.png)|![](images/08.png)|![](images/09.png)|
 
 ### 特点
-* LinearLayout、RelativeLayout、FrameLayout支持圆角
+* LinearLayout、RelativeLayout、FrameLayout、ConstraintLayout支持圆角
 * ImageView、TextView、View、Button支持圆角
 * CircleImageView（圆形图片）
 * 支持边框（不遮挡图片）
@@ -36,7 +36,7 @@ allprojects {
 **Step 2. 添加项目依赖**
 ``` gradle
 dependencies {
-    implementation 'com.github.KuangGang:RoundCorners:1.1.0'
+    implementation 'com.github.KuangGang:RoundCorners:1.3.0'
 }
 ```
 **Step 3. 在布局文件中添加需要的RoundCorners**
@@ -117,6 +117,7 @@ View的绘制看一下这篇文章即可，代码版本比较早，但是逻辑�
 ### 版本记录
 |版本号|更新内容|
 |---|---|
+|1.3.0|1.修复代码设置圆角失效等问题<br>2.升级最低版本为5.0<br>3.添加RoundConstraintLayout|
 |1.1.0|边框颜色支持十六进制(#FFFFFF)|
 |1.0.6|修复Oppo等5.0\5.1系统手机崩溃问题|
 |1.0.4|1.代码设置圆角、边框尺寸支持浮点型<br>2.删除RoundViewPager|
