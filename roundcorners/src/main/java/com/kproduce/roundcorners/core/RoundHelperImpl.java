@@ -172,6 +172,7 @@ public class RoundHelperImpl implements RoundHelper {
         mRadiusBottomLeft = radiusPx;
         mRadiusBottomRight = radiusPx;
         if (mView != null) {
+            onSizeChanged(mWidth, mHeight);
             mView.invalidate();
         }
     }
@@ -186,6 +187,7 @@ public class RoundHelperImpl implements RoundHelper {
         mRadiusBottomLeft = DensityUtil.dip2px(mContext, radiusBottomLeftDp);
         mRadiusBottomRight = DensityUtil.dip2px(mContext, radiusBottomRightDp);
         if (mView != null) {
+            onSizeChanged(mWidth, mHeight);
             mView.invalidate();
         }
     }
@@ -199,6 +201,7 @@ public class RoundHelperImpl implements RoundHelper {
         mRadiusTopLeft = radiusPx;
         mRadiusBottomLeft = radiusPx;
         if (mView != null) {
+            onSizeChanged(mWidth, mHeight);
             mView.invalidate();
         }
     }
@@ -212,6 +215,7 @@ public class RoundHelperImpl implements RoundHelper {
         mRadiusTopRight = radiusPx;
         mRadiusBottomRight = radiusPx;
         if (mView != null) {
+            onSizeChanged(mWidth, mHeight);
             mView.invalidate();
         }
     }
@@ -225,6 +229,7 @@ public class RoundHelperImpl implements RoundHelper {
         mRadiusTopLeft = radiusPx;
         mRadiusTopRight = radiusPx;
         if (mView != null) {
+            onSizeChanged(mWidth, mHeight);
             mView.invalidate();
         }
     }
@@ -238,6 +243,7 @@ public class RoundHelperImpl implements RoundHelper {
         mRadiusBottomLeft = radiusPx;
         mRadiusBottomRight = radiusPx;
         if (mView != null) {
+            onSizeChanged(mWidth, mHeight);
             mView.invalidate();
         }
     }
@@ -249,6 +255,7 @@ public class RoundHelperImpl implements RoundHelper {
         }
         mRadiusTopLeft = DensityUtil.dip2px(mContext, radiusDp);
         if (mView != null) {
+            onSizeChanged(mWidth, mHeight);
             mView.invalidate();
         }
     }
@@ -260,6 +267,7 @@ public class RoundHelperImpl implements RoundHelper {
         }
         mRadiusTopRight = DensityUtil.dip2px(mContext, radiusDp);
         if (mView != null) {
+            onSizeChanged(mWidth, mHeight);
             mView.invalidate();
         }
     }
@@ -271,6 +279,7 @@ public class RoundHelperImpl implements RoundHelper {
         }
         mRadiusBottomLeft = DensityUtil.dip2px(mContext, radiusDp);
         if (mView != null) {
+            onSizeChanged(mWidth, mHeight);
             mView.invalidate();
         }
     }
@@ -282,6 +291,7 @@ public class RoundHelperImpl implements RoundHelper {
         }
         mRadiusBottomRight = DensityUtil.dip2px(mContext, radiusDp);
         if (mView != null) {
+            onSizeChanged(mWidth, mHeight);
             mView.invalidate();
         }
     }
@@ -302,6 +312,7 @@ public class RoundHelperImpl implements RoundHelper {
     public void setStrokeColor(int color) {
         mStrokeColor = color;
         if (mView != null) {
+            onSizeChanged(mWidth, mHeight);
             mView.invalidate();
         }
     }
