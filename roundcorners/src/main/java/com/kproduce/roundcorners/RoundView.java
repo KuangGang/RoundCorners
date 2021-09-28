@@ -5,15 +5,16 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.kproduce.roundcorners.util.RoundHelper;
-import com.kproduce.roundcorners.util.RoundMethodInterface;
+import com.kproduce.roundcorners.core.RoundHelper;
+import com.kproduce.roundcorners.core.RoundHelperImpl;
+import com.kproduce.roundcorners.core.RoundMethodInterface;
 
 /**
  * @author kuanggang on 2019/12/10
  */
 public class RoundView extends View implements RoundMethodInterface {
 
-    private RoundHelper mHelper = new RoundHelper();
+    private final RoundHelper mHelper = new RoundHelperImpl();
 
     public RoundView(Context context) {
         this(context, null);

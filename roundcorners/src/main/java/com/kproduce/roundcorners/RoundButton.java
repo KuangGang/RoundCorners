@@ -5,15 +5,16 @@ import android.graphics.Canvas;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 
-import com.kproduce.roundcorners.util.RoundHelper;
-import com.kproduce.roundcorners.util.RoundMethodInterface;
+import com.kproduce.roundcorners.core.RoundHelper;
+import com.kproduce.roundcorners.core.RoundHelperImpl;
+import com.kproduce.roundcorners.core.RoundMethodInterface;
 
 /**
  * @author kuanggang on 2019/12/10
  */
 public class RoundButton extends AppCompatButton implements RoundMethodInterface {
 
-    private RoundHelper mHelper = new RoundHelper();
+    private final RoundHelper mHelper = new RoundHelperImpl();
 
     public RoundButton(Context context) {
         this(context, null);

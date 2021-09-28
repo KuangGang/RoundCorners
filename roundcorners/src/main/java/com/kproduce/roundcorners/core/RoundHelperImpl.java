@@ -1,4 +1,4 @@
-package com.kproduce.roundcorners.util;
+package com.kproduce.roundcorners.core;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -13,14 +13,14 @@ import android.graphics.Xfermode;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.kproduce.roundcorners.R;
+import com.kproduce.roundcorners.util.DensityUtil;
 
 /**
  * @author kuanggang on 2019/12/10
  */
-public class RoundHelper {
+public class RoundHelperImpl implements RoundHelper {
 
     private Context mContext;
     private View mView;
@@ -28,6 +28,7 @@ public class RoundHelper {
     private Paint mPaint;
     private RectF mRectF;
     private RectF mStrokeRectF;
+    private RectF mOriginRectF;
 
     private Path mPath;
     private Path mTempPath;
@@ -49,17 +50,22 @@ public class RoundHelper {
     private float mRadiusBottomLeft;
     private float mRadiusBottomRight;
 
+    @Override
     public void init(Context context, AttributeSet attrs, View view) {
-        if (view instanceof ViewGroup && view.getBackground() == null) {
+        if (view.getBackground() == null) {
             view.setBackgroundColor(Color.parseColor("#00000000"));
         }
+        view.setLayerType(View.LAYER_TYPE_NONE, null);
+
         mContext = context;
         mView = view;
         mRadii = new float[8];
         mStrokeRadii = new float[8];
         mPaint = new Paint();
+
         mRectF = new RectF();
         mStrokeRectF = new RectF();
+        mOriginRectF = new RectF();
         mPath = new Path();
         mTempPath = new Path();
         mXfermode = new PorterDuffXfermode(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PorterDuff.Mode.DST_OUT : PorterDuff.Mode.DST_IN);
@@ -84,53 +90,39 @@ public class RoundHelper {
         mStrokeColor = array.getColor(R.styleable.RoundButton_rStrokeColor, mStrokeColor);
 
         array.recycle();
-        if (!isCircle) {
-            setRadius();
-        }
     }
 
-    private void setRadius() {
-        mRadii[0] = mRadii[1] = mRadiusTopLeft - mStrokeWidth;
-        mRadii[2] = mRadii[3] = mRadiusTopRight - mStrokeWidth;
-        mRadii[4] = mRadii[5] = mRadiusBottomRight - mStrokeWidth;
-        mRadii[6] = mRadii[7] = mRadiusBottomLeft - mStrokeWidth;
-
-        mStrokeRadii[0] = mStrokeRadii[1] = mRadiusTopLeft;
-        mStrokeRadii[2] = mStrokeRadii[3] = mRadiusTopRight;
-        mStrokeRadii[4] = mStrokeRadii[5] = mRadiusBottomRight;
-        mStrokeRadii[6] = mStrokeRadii[7] = mRadiusBottomLeft;
-    }
-
+    @Override
     public void onSizeChanged(int width, int height) {
         mWidth = width;
         mHeight = height;
 
         if (isCircle) {
-            float radius = Math.min(height, width) * 1f / 2 - mStrokeWidth;
+            float radius = Math.min(height, width) * 1f / 2;
             mRadiusTopLeft = radius;
             mRadiusTopRight = radius;
             mRadiusBottomRight = radius;
             mRadiusBottomLeft = radius;
-            setRadius();
         }
+        setRadius();
+
         if (mRectF != null) {
-            mRectF.set(0, 0, width, height);
+            mRectF.set(mStrokeWidth, mStrokeWidth, width - mStrokeWidth, height - mStrokeWidth);
         }
         if (mStrokeRectF != null) {
             mStrokeRectF.set((mStrokeWidth / 2), (mStrokeWidth / 2), width - mStrokeWidth / 2, height - mStrokeWidth / 2);
         }
-    }
-
-    public void preDraw(Canvas canvas) {
-        canvas.saveLayer(mRectF, null, Canvas.ALL_SAVE_FLAG);
-        if (mStrokeWidth > 0) {
-            float sx = (mWidth - 2 * mStrokeWidth) / mWidth;
-            float sy = (mHeight - 2 * mStrokeWidth) / mHeight;
-            // 缩小画布，使图片内容不被borders覆盖
-            canvas.scale(sx, sy, mWidth / 2.0f, mHeight / 2.0f);
+        if (mOriginRectF != null) {
+            mOriginRectF.set(0, 0, width, height);
         }
     }
 
+    @Override
+    public void preDraw(Canvas canvas) {
+        canvas.saveLayer(mRectF, null, Canvas.ALL_SAVE_FLAG);
+    }
+
+    @Override
     public void drawPath(Canvas canvas) {
         mPaint.reset();
         mPath.reset();
@@ -142,7 +134,7 @@ public class RoundHelper {
         mPath.addRoundRect(mRectF, mRadii, Path.Direction.CCW);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             mTempPath.reset();
-            mTempPath.addRect(mRectF, Path.Direction.CCW);
+            mTempPath.addRect(mOriginRectF, Path.Direction.CCW);
             mTempPath.op(mPath, Path.Op.DIFFERENCE);
             canvas.drawPath(mTempPath, mPaint);
         } else {
@@ -150,6 +142,7 @@ public class RoundHelper {
         }
         mPaint.setXfermode(null);
         canvas.restore();
+        mPaint.setXfermode(null);
 
         // draw stroke
         if (mStrokeWidth > 0) {
@@ -163,10 +156,12 @@ public class RoundHelper {
         }
     }
 
+    @Override
     public void setCircle(boolean isCircle) {
         this.isCircle = isCircle;
     }
 
+    @Override
     public void setRadius(float radiusDp) {
         if (mContext == null) {
             return;
@@ -181,6 +176,7 @@ public class RoundHelper {
         }
     }
 
+    @Override
     public void setRadius(float radiusTopLeftDp, float radiusTopRightDp, float radiusBottomLeftDp, float radiusBottomRightDp) {
         if (mContext == null) {
             return;
@@ -194,6 +190,7 @@ public class RoundHelper {
         }
     }
 
+    @Override
     public void setRadiusLeft(float radiusDp) {
         if (mContext == null) {
             return;
@@ -206,6 +203,7 @@ public class RoundHelper {
         }
     }
 
+    @Override
     public void setRadiusRight(float radiusDp) {
         if (mContext == null) {
             return;
@@ -218,6 +216,7 @@ public class RoundHelper {
         }
     }
 
+    @Override
     public void setRadiusTop(float radiusDp) {
         if (mContext == null) {
             return;
@@ -230,6 +229,7 @@ public class RoundHelper {
         }
     }
 
+    @Override
     public void setRadiusBottom(float radiusDp) {
         if (mContext == null) {
             return;
@@ -242,6 +242,7 @@ public class RoundHelper {
         }
     }
 
+    @Override
     public void setRadiusTopLeft(float radiusDp) {
         if (mContext == null) {
             return;
@@ -252,6 +253,7 @@ public class RoundHelper {
         }
     }
 
+    @Override
     public void setRadiusTopRight(float radiusDp) {
         if (mContext == null) {
             return;
@@ -262,6 +264,7 @@ public class RoundHelper {
         }
     }
 
+    @Override
     public void setRadiusBottomLeft(float radiusDp) {
         if (mContext == null) {
             return;
@@ -272,6 +275,7 @@ public class RoundHelper {
         }
     }
 
+    @Override
     public void setRadiusBottomRight(float radiusDp) {
         if (mContext == null) {
             return;
@@ -282,18 +286,19 @@ public class RoundHelper {
         }
     }
 
+    @Override
     public void setStrokeWidth(float widthDp) {
         if (mContext == null) {
             return;
         }
         mStrokeWidth = DensityUtil.dip2px(mContext, widthDp);
         if (mView != null) {
-            setRadius();
             onSizeChanged(mWidth, mHeight);
             mView.invalidate();
         }
     }
 
+    @Override
     public void setStrokeColor(int color) {
         mStrokeColor = color;
         if (mView != null) {
@@ -301,6 +306,7 @@ public class RoundHelper {
         }
     }
 
+    @Override
     public void setStrokeWidthColor(float widthDp, int color) {
         if (mContext == null) {
             return;
@@ -308,9 +314,20 @@ public class RoundHelper {
         mStrokeWidth = DensityUtil.dip2px(mContext, widthDp);
         mStrokeColor = color;
         if (mView != null) {
-            setRadius();
             onSizeChanged(mWidth, mHeight);
             mView.invalidate();
         }
+    }
+
+    private void setRadius() {
+        mRadii[0] = mRadii[1] = mRadiusTopLeft - mStrokeWidth;
+        mRadii[2] = mRadii[3] = mRadiusTopRight - mStrokeWidth;
+        mRadii[4] = mRadii[5] = mRadiusBottomRight - mStrokeWidth;
+        mRadii[6] = mRadii[7] = mRadiusBottomLeft - mStrokeWidth;
+
+        mStrokeRadii[0] = mStrokeRadii[1] = mRadiusTopLeft - mStrokeWidth / 2;
+        mStrokeRadii[2] = mStrokeRadii[3] = mRadiusTopRight - mStrokeWidth / 2;
+        mStrokeRadii[4] = mStrokeRadii[5] = mRadiusBottomRight - mStrokeWidth / 2;
+        mStrokeRadii[6] = mStrokeRadii[7] = mRadiusBottomLeft - mStrokeWidth / 2;
     }
 }
