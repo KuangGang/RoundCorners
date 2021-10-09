@@ -2,7 +2,7 @@
 
 比较常用的ViewGroup和View的圆角实现，一发治好设计的圆角病。
 
-### [Demo](https://fir.im/gfhw)
+### 该项目不再维护，请移至[RoundView](https://github.com/csdn-mobile/RoundView)
 
 ### 效果预览
 
