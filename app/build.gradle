@@ -22,4 +22,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':roundcorners')
     implementation 'com.android.support:appcompat-v7:' + support_library_version
+    //implementation 'com.github.xingfude123:RoundCorners:1.1.1'
 }
